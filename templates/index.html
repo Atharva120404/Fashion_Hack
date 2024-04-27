@@ -170,9 +170,12 @@
             </div>
         </div>
         <div class="category">
-            <button onmouseover="showDropdown('womenDropdown')" onmouseleave="hideDropdown('womenDropdown')">Women</button>
+            <a href="{{ url_for('shop_women') }}">
+                <button onmouseover="showDropdown('womenDropdown')" onmouseleave="hideDropdown('womenDropdown')">Women</button>
+            </a>
+            
             <div id="womenDropdown" class="dropdown-content">
-                <a href="#">Dresses</a>
+                <a href="/shop.html">Dresses</a>
                 <a href="#">Skirts</a>
                 <a href="#">Bras</a>
                 <a href="#">HandBags</a>

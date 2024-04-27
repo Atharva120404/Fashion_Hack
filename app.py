@@ -72,16 +72,65 @@ def contact():
 
 @app.route("/shop-details.html")
 def shop_details():
+    
     return render_template("shop-details.html")
 
 @app.route("/shop.html",methods=['GET','POST'])
 def shop():
-     
-     return render_template("shop.html",lists=clothing_products)
+    return render_template('shop.html',lists=clothing_products)
+
+@app.route('/shop_women.html')
+def shop_women():
+    combined_data_list = []
+    
+    # Fetch data from MySQL
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' LIMIT 20;")
+    
+    for row in cursor.fetchall():
+        combined_data_list.append(row)
+    
+    return render_template('shop_women.html', data=combined_data_list)
+
+
+
+    return render_template('shop_women.html', data_list=data_list, data1_list=data1_list)
+    
+# @app.route('/shop_women.html')
+# def shop_women():
+#     data_list = []
+#     data1_list = []
+    
+#     # Fetch data from MySQL
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#     cursor.execute("SELECT id,subCategory, productDisplayName, price FROM sty WHERE gender = 'Women'")
+    
+#     for row in cursor.fetchall():
+#         data_list.append(row)
+#         id = item['id']
+#     input =[]
+#     input=data_list[id]
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#     cursor.execute("SELECT link FROM images WHERE id = '%s",(input))
+    
+#     for row in cursor.fetchall():
+#         data1_list.append(row)
+
+
+    return render_template('shop_women.html', datas=data_list,datas1=data1_list)
+    # query = "SELECT * FROM products WHERE category = %s"
+    # db_cursor.execute(query, (category,))
+    # products = db_cursor.fetchall()
+    # product_list = [{'id': product[0], 'name': product[1]} for product in products]
+    # return render_template("shop_women.html",lists=clothing_products)
+    # #return jsonify(product_list)
+    # # cursor.execute('SELECT * FROM user WHERE email=%s AND password=%s', (email, password))
+    # # user = cursor.fetchone()
+    # return render_template("shop_women.html",lists=clothing_products)
 
 @app.route("/shopping-cart.html")
 def shopping_cart():
-    return render_template("shop-cart.html")
+    return render_template("shopping-cart.html")
 
 @app.route("/product-detail.html?product_id=")
 def prod():
