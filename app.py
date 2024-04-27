@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, Response,send_from_directory
 from flask_mysqldb import MySQL
 from flask_mysqldb import MySQL
+import MySQLdb
 import MySQLdb.cursors
 import re
 import cv2
@@ -30,8 +31,8 @@ print("Atharvba ")
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'user-system'
-app.config['MYSQL_PORT'] = 3306
+app.config['MYSQL_DB'] = 'hackathon'
+app.config['MYSQL_PORT'] = 3308
 
 mysql = MySQL(app)
 @app.route('/static/<path:filename>')
@@ -73,9 +74,10 @@ def contact():
 def shop_details():
     return render_template("shop-details.html")
 
-@app.route("/shop.html")
+@app.route("/shop.html",methods=['GET','POST'])
 def shop():
-    return render_template("shop.html",lists=clothing_products)
+     
+     return render_template("shop.html",lists=clothing_products)
 
 @app.route("/shopping-cart.html")
 def shopping_cart():
