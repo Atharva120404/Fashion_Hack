@@ -48,7 +48,12 @@ h6 {
 	font-weight: 400;
 	font-family: "Nunito Sans", sans-serif;
 }
-
+.product-card{
+	display: flex;
+	flex-direction: row;
+	width: 250px;
+	height: 510px;
+}
 h1 {
 	font-size: 70px;
 }
@@ -1061,6 +1066,51 @@ ol {
 	font-size: larger;
 	color: black;
 }
+.filters {
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	gap: 80px;
+}
+
+.filter-section {
+	margin-bottom: 20px;
+}
+
+.range-inputs {
+	margin-top: 10px;
+}
+input[type="range"] {
+	width: 100%;
+}
+.output {
+	font-size: 16px;
+	margin-top: 5px;
+}
+select, input[type="text"] {
+	padding: 8px;
+	width: 200px;
+	margin-right: 10px;
+}
+.color-box {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	margin-right: 10px;
+	border: 1px solid #000;
+}
+.submit-button {
+	padding: 10px 20px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	height: 50px;
+}
+
 .product-card {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -1073,6 +1123,10 @@ ol {
 	display: inline-block; /* Set display to inline-block */
     vertical-align: top; /* Align top to prevent extra space */
     margin-bottom: 20px;
+	overflow-wrap: break-word;
+}
+.product-card button{
+	background-color: #000;
 }
 
 .product-image {
@@ -1109,7 +1163,7 @@ ol {
     margin-right: 10px;
 }
 
-.product-details {
+.shop-details {
     padding: 20px;
 }
 

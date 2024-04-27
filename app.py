@@ -81,6 +81,10 @@ def shop():
 def shopping_cart():
     return render_template("shop-cart.html")
 
+@app.route("/product-detail.html?product_id=")
+def prod():
+    return render_template("shop-details.html")
+
 
 if __name__=='__main__':
     app.run(debug=True)
