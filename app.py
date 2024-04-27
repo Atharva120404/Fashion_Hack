@@ -10,6 +10,21 @@ import os
 app = Flask(__name__)
 app.secret_key = 'test'
 
+clothing_products = [
+    {"product_name": "T-Shirt", "prod_description": "Cotton short-sleeve shirt", "pricing": 15.99},
+    {"product_name": "Jeans", "prod_description": "Denim pants", "pricing": 29.99},
+    {"product_name": "Hoodie", "prod_description": "Fleece pullover hoodie", "pricing": 39.99},
+    {"product_name": "Dress", "prod_description": "Floral print summer dress", "pricing": 49.99},
+    {"product_name": "Jacket", "prod_description": "Waterproof windbreaker jacket", "pricing": 59.99},
+    {"product_name": "Skirt", "prod_description": "A-line denim skirt", "pricing": 24.99},
+    {"product_name": "Sweater", "prod_description": "Knitted wool sweater", "pricing": 34.99},
+    {"product_name": "Shorts", "prod_description": "Cargo shorts with pockets", "pricing": 19.99},
+    {"product_name": "Blouse", "prod_description": "Silk floral print blouse", "pricing": 29.99},
+    {"product_name": "Pants", "prod_description": "Slim-fit chino pants", "pricing": 39.99}
+]
+
+
+
 print("Atharvba ")
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -27,6 +42,12 @@ def serve_static(filename):
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/inex.html")
+def home1():
+    return render_template("index.html")
+
+
 
 @app.route("/about.html")
 def about():
@@ -54,7 +75,7 @@ def shop_details():
 
 @app.route("/shop.html")
 def shop():
-    return render_template("shop.html")
+    return render_template("shop.html",lists=clothing_products)
 
 @app.route("/shopping-cart.html")
 def shopping_cart():

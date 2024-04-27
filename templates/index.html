@@ -10,9 +10,11 @@
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
@@ -21,6 +23,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 
     
@@ -64,34 +67,6 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="#">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3">
@@ -102,7 +77,7 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="./">Home</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -120,7 +95,11 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="static\img\icon\search.png" alt=""></a>
+                        <div class="search-container">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                        
                         <a href="#"><img src="static\img\icon\heart.png" alt=""></a>
                         <a href="#"><img src="static\img\icon\cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
@@ -133,7 +112,7 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <!-- <section class="hero">
         <div class="hero__slider owl-carousel">
             <div class="hero__items set-bg" data-setbg="static\img\hero\hero-1.jpg">
                 <div class="container">
@@ -178,8 +157,110 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+    <div class="categories-container">
+        <div class="category">
+            <button onmouseover="showDropdown('menDropdown')" onmouseleave="hideDropdown('menDropdown')">Men</button>
+            <div id="menDropdown" class="dropdown-content">
+                <a href="#">Shirts</a>
+                <a href="#">Trousers</a>
+                <a href="#">Shoes</a>
+                <a href="#">Tees</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+            </div>
+        </div>
+        <div class="category">
+            <button onmouseover="showDropdown('womenDropdown')" onmouseleave="hideDropdown('womenDropdown')">Women</button>
+            <div id="womenDropdown" class="dropdown-content">
+                <a href="#">Dresses</a>
+                <a href="#">Skirts</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+            </div>
+        </div>
+        <div class="category">
+            <button onmouseover="showDropdown('babyDropdown')" onmouseleave="hideDropdown('babyDropdown')">Baby</button>
+            <div id="babyDropdown" class="dropdown-content">
+                <a href="#">Onesies</a>
+                <a href="#">Bibs</a>
+                <a href="#">Blankets</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+                <a href="#">Tops</a>
+            </div>
+        </div>
+    </div>
+    
+    
     <!-- Hero Section End -->
+    
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-64 overflow-hidden rounded-lg md:h-96">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="static\img\hero\hero-1.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+                    <h2 class="data text-xl font-semibold">Title 1</h2>
+                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="static\img\hero\hero-2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+                    <h2 class="data text-xl font-semibold">Title 2</h2>
+                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="static\img\pexels-valeriya-965989.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+                    <h2 class="data text-xl font-semibold">Title 2</h2>
+                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="static\img\hero\hero-2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+                    <h2 class="data text-xl font-semibold" style="color: black;">Title 2</h2>
+                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="static\img\hero-3.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+                    <h2 class="data text-xl font-semibold">Title 2</h2>
+                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <!-- Add more carousel items as needed -->
+        </div>
+        <!-- Slider indicators and controls -->
+        <!-- Add slider indicators and controls here -->
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+    
+    </div>
+    
+
 
     <!-- Banner Section Begin -->
     <section class="banner spad">
@@ -249,7 +330,7 @@
                     </div> -->
                     
 
-                    <div class="product__item">
+                    <div class="product__item"> 
                         <div class="product__item__pic set-bg" style="background-image: url('static/img/product/product-1.jpg')">
                             <span class="label">New</span>
                             <ul class="product__hover">
@@ -487,7 +568,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" style="background-image: url('static/img/product/product-7.jpg')""
+                        <div class="product__item__pic set-bg" style="background-image: url('static/img/product/product-7.jpg')"
                         >
                             <ul class="product__hover">
                                 <li><a href="#"><img src="static\img\icon\heart.png" alt=""></a></li>
@@ -607,79 +688,9 @@
     </section>
     <!-- Categories Section End -->
 
-    <!-- Instagram Section Begin -->
-    <section class="instagram spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="instagram__pic">
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-1.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-2.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-3.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-4.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-5.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-6.jpg"></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="instagram__text">
-                        <h2>Instagram</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                        <h3>#Male_Fashion</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Instagram Section End -->
-
+    
     <!-- Latest Blog Section Begin -->
-    <section class="latest spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Latest News</span>
-                        <h2>Fashion New Trends</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" style="background-image: url('static\img\blog\blog-1.jpg')"></div>
-                        <div class="blog__item__text">
-                            <span><img src="static\img\icon\calendar.png" alt=""> 16 February 2020</span>
-                            <h5>What Curling Irons Are The Best Ones</h5>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" style="background-image: url('static\img\blog\blog-2.jpg')"></div>
-                        <div class="blog__item__text">
-                            <span><img src="static\img\icon\calendar.png" alt=""> 21 February 2020</span>
-                            <h5>Eternity Bands Do Last Forever</h5>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" style="background-image: url('static\img\blog\blog-3.jpg')"></div>
-                        <div class="blog__item__text">
-                            <span><img src="static\img\icon\calendar.png" alt=""> 28 February 2020</span>
-                            <h5>The Health Benefits Of Sunglasses</h5>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Latest Blog Section End -->
+   
 
     <!-- Footer Section Begin -->
     <footer class="footer">
@@ -760,6 +771,16 @@
     <!-- Search End -->
 
     <!-- Js Plugins -->
+    <script>
+        function showDropdown(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function hideDropdown(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+    </script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
@@ -770,6 +791,8 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
