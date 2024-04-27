@@ -9,6 +9,8 @@ import numpy as np
 app = Flask(__name__)
 app.secret_key = 'test'
 
+print("Atharvba ")
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
