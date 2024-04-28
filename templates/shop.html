@@ -100,17 +100,7 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="./">Home</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./about.html">About Us</a></li>
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
@@ -187,7 +177,7 @@
                     <div class="product-card" >
                         <div class="product-image">
                             <img src="{{ list['link'] }}" style="width: 250px; height: 210px;" alt="Product Image">
-                            <span class="label">New</span> <!-- Optional label for new products -->
+    
                         </div>
                         <div class="shop-details">
                             <h3 class="product-title"><div>{{list['articleType']}}</div></h3>
@@ -199,14 +189,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
                             </div>
-                            <span class="product-price"><div>{{list['price']}}</div></span>
-                            <div class="product-color-options">
-                                <label for="color-option-1">
-                                    <input type="radio" id="color-option-1" name="color-option">
-                                    <span class="color-option"></span> <!-- Display color swatch -->
-                                </label>
-                                <!-- Add more color options as needed -->
-                            </div>
+                            <h3><span class="product-price"><div>{{list['price']}}</div></span></h3>
                             <button class="add-to-cart-btn" style="width: 150px;height: 50px;">Add to Cart</button>
                         </div>
                     </div>

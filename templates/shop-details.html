@@ -101,16 +101,7 @@
                         <ul>
                             <li><a href="./">Home</a></li>
                             <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./about.html">About Us</a></li>
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
@@ -252,144 +243,36 @@
                     <h3 class="related-title">Related Product</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\product\product-1.jpg">
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>{{ product_display_name }}</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
+            <div class="main_div" style="display: flex;">
+                {% for list in rec_prod_list %}
+                        <div class="product-card" style="display: flex; flex-direction: column; " >
+                            <div class="product-image ">
+                                <img src="{{list['link'] }}" style="width: 250px; height: 210px;" alt="Product Image">
+                    
                             </div>
-                            <h5>$67.24</h5>
-                            <div class="product__color__select">
-                                <label for="pc-1">
-                                    <input type="radio" id="pc-1">
-                                </label>
-                                <label class="active black" for="pc-2">
-                                    <input type="radio" id="pc-2">
-                                </label>
-                                <label class="grey" for="pc-3">
-                                    <input type="radio" id="pc-3">
-                                </label>
+                            <div class="shop-details">
+                                <h3 class="product-title"><div>{{list['subCategoryName']}}</div></h3>
+                                <p class="product-description"><div class="product_text">{{list['productDisplayName']}}</div></p>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
+                                </div>
+                                <span class="product-price"><div>{{list['price']}}</div></span>
+                                <div class="product-color-options">
+                                    <label for="color-option-1">
+                                        <input type="radio" id="color-option-1" name="color-option">
+                                        <span class="color-option"></span> <!-- Display color swatch -->
+                                    </label>
+                                    <!-- Add more color options as needed -->
+                                </div>
+                                <button class="add-to-cart-btn" style="width: 150px;height: 50px;">Add to Cart</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\product\product-2.jpg">
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Piqué Biker Jacket</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$67.24</h5>
-                            <div class="product__color__select">
-                                <label for="pc-4">
-                                    <input type="radio" id="pc-4">
-                                </label>
-                                <label class="active black" for="pc-5">
-                                    <input type="radio" id="pc-5">
-                                </label>
-                                <label class="grey" for="pc-6">
-                                    <input type="radio" id="pc-6">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item sale">
-                        <div class="product__item__pic set-bg" data-setbg="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\product\product-3.jpg">
-            
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Multi-pocket Chest Bag</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$43.48</h5>
-                            <div class="product__color__select">
-                                <label for="pc-7">
-                                    <input type="radio" id="pc-7">
-                                </label>
-                                <label class="active black" for="pc-8">
-                                    <input type="radio" id="pc-8">
-                                </label>
-                                <label class="grey" for="pc-9">
-                                    <input type="radio" id="pc-9">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\product\product-4.jpg">
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\icon\search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Diagonal Textured Cap</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$60.9</h5>
-                            <div class="product__color__select">
-                                <label for="pc-10">
-                                    <input type="radio" id="pc-10">
-                                </label>
-                                <label class="active black" for="pc-11">
-                                    <input type="radio" id="pc-11">
-                                </label>
-                                <label class="grey" for="pc-12">
-                                    <input type="radio" id="pc-12">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    
+                {% endfor %}
             </div>
         </div>
     </section>

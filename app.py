@@ -102,7 +102,7 @@ def extract_img_features(img, model):
 
 # Define function to recommend similar images
 def recommend(features, features_list):
-    neighbors = NearestNeighbors(n_neighbors=6, algorithm='brute', metric='euclidean')
+    neighbors = NearestNeighbors(n_neighbors=25, algorithm='brute', metric='euclidean')
     neighbors.fit(features_list)
     distances, indices = neighbors.kneighbors([features])
     return indices
@@ -183,15 +183,38 @@ def shop_details():
     # product_info1 = cursor.fetchall()
     specific_id = 19834  # Change this to the specific ID you want to fetch data for
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    query = "SELECT id, subCategory, productDisplayName, price FROM sty WHERE id = 1541"
-    cursor.execute(query)
-    product_info1 = cursor.fetchone()
-    print(product_info1)
+    rec_prod_list=[]
+    for i in id_list:
+        if len(rec_prod_list) >= 5:
+            break
+        specific_id=i
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        query = "SELECT id, subCategory, productDisplayName, price FROM sty WHERE id = %s"
+        cursor.execute(query, (specific_id,))
+        product_info1 = cursor.fetchone()
+        if product_info1 is not None:
+            rec_prod_list.append(product_info1)
+    count=0
+    for i in rec_prod_list:
+        file_name=str(i['id'])+'.jpg'
+        print(file_name)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        query = "SELECT link FROM images WHERE filename = %s"
+        cursor.execute(query, (file_name,))
+        product_info2 = cursor.fetchone()
+        print(product_info2)
+        rec_prod_list[count]['link']=product_info2['link']
+        count+=1
+
+
+    print(rec_prod_list)
+    
+
 
 
 
     # Pass the list to the rendered template
-    return render_template('shop-details.html', product_info=product_info)
+    return render_template('shop-details.html', product_info=product_info,rec_prod_list=rec_prod_list,)
     # link = request.args.get('link')
     # article_type = request.args.get('articleType')
     # product_display_name = request.args.get('productDisplayName')
@@ -229,16 +252,42 @@ def shop():
 
 @app.route('/shop_women.html')
 def shop_women():
+    from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/process_wear_type', methods=['POST'])
+def process_wear_type():
+    wear_type = request.form['wear_type']
+    # Redirect to the route that fetches data based on wear type
+    return redirect(url_for('fetch_data', wear_type=wear_type))
+
+@app.route('/fetch_data/<wear_type>', methods=['GET'])
+def fetch_data(wear_type):
     combined_data_list = []
     
-    # Fetch data from MySQL
+    # Fetch data from MySQL based on wear type
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' LIMIT 20;")
+    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' AND sty.wearType = %s LIMIT 20;", (wear_type,))
     
     for row in cursor.fetchall():
         combined_data_list.append(row)
     
     return render_template('shop_women.html', data=combined_data_list)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+    # combined_data_list = []
+    
+    # # Fetch data from MySQL
+    # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' LIMIT 20;")
+    
+    # for row in cursor.fetchall():
+    #     combined_data_list.append(row)
+    
+    # return render_template('shop_women.html', data=combined_data_list)
 
 
 
