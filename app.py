@@ -177,7 +177,17 @@ def shop_details():
         id = int(id[45:-4])
         id_list.append(id)
     print(id_list)
-    
+    # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # cursor.execute("SELECT (id, subCategory, productDisplayName, price) FROM sty WHERE id = 19834")
+    # product_info1 = cursor.fetchall()
+    specific_id = 19834  # Change this to the specific ID you want to fetch data for
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    query = "SELECT id, subCategory, productDisplayName, price FROM sty WHERE id = 1541"
+    cursor.execute(query)
+    product_info1 = cursor.fetchone()
+    print(product_info1)
+
 
 
     # Pass the list to the rendered template
