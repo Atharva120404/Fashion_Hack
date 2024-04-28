@@ -2,12 +2,12 @@
     <a href="/shop-details.html" style="text-decoration: none; color: inherit;">
         <div class="product-card" >
             <div class="product-image">
-                <img src="static\img\product\product-5.jpg" style="width: 250px; height: 210px;" alt="Product Image">
+                <img src="{{ lists['link'] }}" style="width: 250px; height: 210px;" alt="Product Image">
                 <span class="label">New</span> <!-- Optional label for new products -->
             </div>
             <div class="shop-details">
-                <h3 class="product-title"><div>{{list['product_name']}}</div></h3>
-                <p class="product-description"><div class="product_text">{{list['prod_description']}}</div></p>
+                <h3 class="product-title"><div>{{lists['articleType']}}</div></h3>
+                <p class="product-description"><div class="product_text">{{lists['productDisplayName']}}</div></p>
                 <div class="product-rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -15,7 +15,7 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
                 </div>
-                <span class="product-price"><div>{{list['pricing']}}</div></span>
+                <span class="product-price"><div>{{lists['season']}}</div></span>
                 <div class="product-color-options">
                     <label for="color-option-1">
                         <input type="radio" id="color-option-1" name="color-option">
@@ -23,7 +23,7 @@
                     </label>
                     <!-- Add more color options as needed -->
                 </div>
-                <button class="add-to-cart-btn" style="width: 150px;height: 50px;">Add to Cart</button>
+                <button class="add-to-cart-btn" style="width: 150px;height: 50px;"onclick="addToCart()>Add to Cart</button>
             </div>
         </div>
     </a>

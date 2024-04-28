@@ -181,9 +181,38 @@
 
     <!-- Shop Section Begin -->
     <div>
-        {%for list in lists%}
-            {% include 'product.html' %}
-        {% endfor %}
+            {% for list in lists%}
+                
+                <a href="/shop-details.html?link={{ list['link'] }}&articleType={{ list['articleType'] }}&productDisplayName={{ list['productDisplayName'] }}&price={{ list['price'] }}" style="text-decoration: none; color: inherit;">
+                    <div class="product-card" >
+                        <div class="product-image">
+                            <img src="{{ list['link'] }}" style="width: 250px; height: 210px;" alt="Product Image">
+                            <span class="label">New</span> <!-- Optional label for new products -->
+                        </div>
+                        <div class="shop-details">
+                            <h3 class="product-title"><div>{{list['articleType']}}</div></h3>
+                            <p class="product-description"><div class="product_text">{{list['productDisplayName']}}</div></p>
+                            <div class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
+                            </div>
+                            <span class="product-price"><div>{{list['price']}}</div></span>
+                            <div class="product-color-options">
+                                <label for="color-option-1">
+                                    <input type="radio" id="color-option-1" name="color-option">
+                                    <span class="color-option"></span> <!-- Display color swatch -->
+                                </label>
+                                <!-- Add more color options as needed -->
+                            </div>
+                            <button class="add-to-cart-btn" style="width: 150px;height: 50px;">Add to Cart</button>
+                        </div>
+                    </div>
+                </a>
+
+            {% endfor %}
     </div>
 
     
@@ -281,7 +310,42 @@
 
     minPriceLabel.textContent = minPrice.value;
     maxPriceLabel.textContent = maxPrice.value;
+
+    function addToCart() {
+    // Get the table body where new rows will be added
+    var tableBody = document.querySelector('.shopping__cart__table tbody');
+
+    // Create a new row element
+    var newRow = document.createElement('tr');
+
+    // Set the innerHTML of the new row to match the structure of existing rows
+    newRow.innerHTML = `
+        <td class="product__cart__item">
+            <div class="product__cart__item__pic">
+                <img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\shopping-cart\cart-1.jpg" alt="">
+            </div>
+            <div class="product__cart__item__text">
+                <h6>T-shirt Contrast Pocket</h6>
+                <h5>$98.49</h5>
+            </div>
+        </td>
+        <td class="quantity__item">
+            <div class="quantity">
+                <div class="pro-qty-2">
+                    <input type="text" value="1">
+                </div>
+            </div>
+        </td>
+        <td class="cart__price">$ 30.00</td>
+        <td class="cart__close"><i class="fa fa-close"></i></td>
+    `;
+
+    // Append the new row to the table body
+    tableBody.appendChild(newRow);
 }
+
+}
+
     </script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

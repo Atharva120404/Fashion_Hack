@@ -7,32 +7,105 @@ import re
 import cv2
 import numpy as np
 import os
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+from flask import request
+import urllib.request 
+from PIL import Image 
+import tensorflow as tf
+import numpy as np
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+from tensorflow.keras.layers import GlobalMaxPooling2D
+from tensorflow.keras.models import Sequential
+from numpy.linalg import norm
+from sklearn.neighbors import NearestNeighbors
+import pickle
+from PIL import Image
+
+# Load precomputed features and image file paths
+features_list = pickle.load(open(r"C:\Users\Admin\Desktop\Hackathon\image_features_embedding.pkl", "rb"))
+img_files_list = pickle.load(open(r"C:\Users\Admin\Desktop\Hackathon\img_files.pkl", "rb"))
+
+# Load pre-trained ResNet50 model
+model = ResNet50(weights="imagenet", include_top=False, input_shape=(224, 224, 3))
+model.trainable = False
+model = Sequential([model, GlobalMaxPooling2D()])
 
 app = Flask(__name__)
 app.secret_key = 'test'
 
-clothing_products = [
-    {"product_name": "T-Shirt", "prod_description": "Cotton short-sleeve shirt", "pricing": 15.99},
-    {"product_name": "Jeans", "prod_description": "Denim pants", "pricing": 29.99},
-    {"product_name": "Hoodie", "prod_description": "Fleece pullover hoodie", "pricing": 39.99},
-    {"product_name": "Dress", "prod_description": "Floral print summer dress", "pricing": 49.99},
-    {"product_name": "Jacket", "prod_description": "Waterproof windbreaker jacket", "pricing": 59.99},
-    {"product_name": "Skirt", "prod_description": "A-line denim skirt", "pricing": 24.99},
-    {"product_name": "Sweater", "prod_description": "Knitted wool sweater", "pricing": 34.99},
-    {"product_name": "Shorts", "prod_description": "Cargo shorts with pockets", "pricing": 19.99},
-    {"product_name": "Blouse", "prod_description": "Silk floral print blouse", "pricing": 29.99},
-    {"product_name": "Pants", "prod_description": "Slim-fit chino pants", "pricing": 39.99}
-]
+# clothing_products = [
+#     {"product_name": "T-Shirt", "prod_description": "Cotton short-sleeve shirt", "pricing": 15.99},
+#     {"product_name": "Jeans", "prod_description": "Denim pants", "pricing": 29.99},
+#     {"product_name": "Hoodie", "prod_description": "Fleece pullover hoodie", "pricing": 39.99},
+#     {"product_name": "Dress", "prod_description": "Floral print summer dress", "pricing": 49.99},
+#     {"product_name": "Jacket", "prod_description": "Waterproof windbreaker jacket", "pricing": 59.99},
+#     {"product_name": "Skirt", "prod_description": "A-line denim skirt", "pricing": 24.99},
+#     {"product_name": "Sweater", "prod_description": "Knitted wool sweater", "pricing": 34.99},
+#     {"product_name": "Shorts", "prod_description": "Cargo shorts with pockets", "pricing": 19.99},
+#     {"product_name": "Blouse", "prod_description": "Silk floral print blouse", "pricing": 29.99},
+#     {"product_name": "Pants", "prod_description": "Slim-fit chino pants", "pricing": 39.99}
+# ]
 
 
 
-print("Atharvba ")
+
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'hackathon'
 app.config['MYSQL_PORT'] = 3308
+
+styles_red=pd.read_csv(r'C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\combined (1).csv')
+# images = pd.read_csv('')
+styles_red['productDisplayName'] = styles_red['productDisplayName'].str.lower().str.replace('[^\w\s]', '')
+print(styles_red)
+
+# Create a CountVectorizer to convert text to numerical vectors
+vectorizer = CountVectorizer()
+
+# Fit and transform the product display names
+product_vectors = vectorizer.fit_transform(styles_red['productDisplayName'])
+
+def get_top_n_recommendations(query, n=50):
+    # Preprocess the query
+    preprocessed_query = query.lower().replace('[^\w\s]', '')
+
+    # Transform the query into a numerical vector
+    query_vector = vectorizer.transform([preprocessed_query])
+
+    # Calculate cosine similarity between the query vector and all product vectors
+    similarity_scores = cosine_similarity(query_vector, product_vectors)
+    print(len(similarity_scores[0]))
+    # Get the indices of the top n recommendations
+    top_indices = similarity_scores.argsort()[0][-n:][::-1]
+
+    # Return the top n recommendations
+    top_recommendations = styles_red.iloc[top_indices] # ['productDisplayName'].tolist()  
+    top_rec=top_recommendations.to_dict('records')
+    
+
+    return top_rec
+
+def extract_img_features(img, model):
+    img_array = image.img_to_array(img)
+    expand_img = np.expand_dims(img_array, axis=0)
+    preprocessed_img = preprocess_input(expand_img)
+    result_to_resnet = model.predict(preprocessed_img)
+    flatten_result = result_to_resnet.flatten()
+    # Normalizing
+    result_normalized = flatten_result / norm(flatten_result)
+    return result_normalized
+
+# Define function to recommend similar images
+def recommend(features, features_list):
+    neighbors = NearestNeighbors(n_neighbors=6, algorithm='brute', metric='euclidean')
+    neighbors.fit(features_list)
+    distances, indices = neighbors.kneighbors([features])
+    return indices
 
 mysql = MySQL(app)
 @app.route('/static/<path:filename>')
@@ -70,14 +143,89 @@ def checkout():
 def contact():
     return render_template("contact.html")
 
-@app.route("/shop-details.html")
+@app.route('/shop-details.html')
 def shop_details():
-    
-    return render_template("shop-details.html")
+     # Retrieve values from the URL query parameters
+    link = request.args.get('link')
+    article_type = request.args.get('articleType')
+    product_display_name = request.args.get('productDisplayName')
+    price = request.args.get('price')
+
+    # Create a list to store the values
+    product_info = {
+        'link': link,
+        'article_type': article_type,
+        'product_display_name': product_display_name,
+        'price': price
+    }
+    url = link 
+    urllib.request.urlretrieve(url, "test.jpg")
+    target_image_path = r"C:\Users\Admin\Desktop\Hackathon\test.jpg"
+    target_image = Image.open(target_image_path)
+    target_image = target_image.resize((224, 224))  # Resize to match the model input size
+    target_features = extract_img_features(target_image, model)
+
+    # Get indices of similar images
+    similar_image_indices = recommend(target_features, features_list)[0]
+
+    # Display recommended images
+    print("Recommended Images:")
+    id_list = []
+    for i, idx in enumerate(similar_image_indices):
+        print(f"{i+1}. {img_files_list[idx]}")
+        id = str(img_files_list[idx])
+        id = int(id[45:-4])
+        id_list.append(id)
+    print(id_list)
+    # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # cursor.execute("SELECT (id, subCategory, productDisplayName, price) FROM sty WHERE id = 19834")
+    # product_info1 = cursor.fetchall()
+    specific_id = 19834  # Change this to the specific ID you want to fetch data for
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    query = "SELECT id, subCategory, productDisplayName, price FROM sty WHERE id = 1541"
+    cursor.execute(query)
+    product_info1 = cursor.fetchone()
+    print(product_info1)
+
+
+
+    # Pass the list to the rendered template
+    return render_template('shop-details.html', product_info=product_info)
+    # link = request.args.get('link')
+    # article_type = request.args.get('articleType')
+    # product_display_name = request.args.get('productDisplayName')
+    # season = request.args.get('season')
+    # print("Values",link,article_type,product_display_name,season)
+
+    # # Pass these values to your template for rendering
+    # return render_template('shop-details.html', links=link, article_type=article_type, product_display_name=product_display_name, season=season)
 
 @app.route("/shop.html",methods=['GET','POST'])
 def shop():
-    return render_template('shop.html',lists=clothing_products)
+     # Retrieve values from the URL query parameters
+    link = request.args.get('link')
+    article_type = request.args.get('articleType')
+    product_display_name = request.args.get('productDisplayName')
+    price = request.args.get('price')
+
+    # Create a list to store the values
+    list = {
+        'link': link,
+        'article_type': article_type,
+        'product_display_name': product_display_name,
+        'price': price
+    }
+    
+    if 'search_box' in request.form:
+        search_text = request.form['search_box']
+        
+        top_rec=get_top_n_recommendations(search_text)
+            
+
+    return render_template('shop.html',lists=top_rec,list=list)
+
+
 
 @app.route('/shop_women.html')
 def shop_women():
@@ -94,7 +242,18 @@ def shop_women():
 
 
 
-    return render_template('shop_women.html', data_list=data_list, data1_list=data1_list)
+@app.route('/shop_men.html')
+def shop_men():
+    combined_data_list = []
+    
+    # Fetch data from MySQL
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Men' LIMIT 20;")
+    
+    for row in cursor.fetchall():
+        combined_data_list.append(row)
+    
+    return render_template('shop_men.html', data=combined_data_list)
     
 # @app.route('/shop_women.html')
 # def shop_women():
