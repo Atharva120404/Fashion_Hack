@@ -147,7 +147,20 @@
                 </div>
             </div>
         </div>
-        <div class="filter-section">
+        <form action="/process_wear_type" method="post">
+            <div class="filter-section">
+                <label for="wear-type">Wear Type:</label>
+                <select id="wear-type" name="wear_type">
+                    <option value="casual">Casual</option>
+                    <option value="formal">Formal</option>
+                    <option value="sports">Sports</option>
+                    <option value="ethnic">Ethnic</option>
+                </select>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        
+        <!-- <div class="filter-section">
             <label for="wear-type">Wear Type:</label>
             <select id="wear-type">
                 <option value="casual">Casual</option>
@@ -155,7 +168,7 @@
                 <option value="sports">Sports</option>
                 <option value="ethnic">Ethnic</option>
             </select>
-        </div>
+        </div> -->
         <div class="filter-section">
             <label for="colorSelect">Color:</label>
             <select id="colorSelect">

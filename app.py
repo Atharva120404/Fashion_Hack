@@ -23,7 +23,7 @@ from numpy.linalg import norm
 from sklearn.neighbors import NearestNeighbors
 import pickle
 from PIL import Image
-
+import random
 # Load precomputed features and image file paths
 features_list = pickle.load(open(r"C:\Users\Admin\Desktop\Hackathon\image_features_embedding.pkl", "rb"))
 img_files_list = pickle.load(open(r"C:\Users\Admin\Desktop\Hackathon\img_files.pkl", "rb"))
@@ -242,52 +242,33 @@ def shop():
     
     if 'search_box' in request.form:
         search_text = request.form['search_box']
-        
+            
         top_rec=get_top_n_recommendations(search_text)
+        price_list=[]
+        for i in range(len(top_rec)):
+            price_list.append(random.randint(500,5000))
             
 
-    return render_template('shop.html',lists=top_rec,list=list)
+    print(list)
+            
+
+    return render_template('shop.html',lists=top_rec,list=list,price_list=price_list)
 
 
 
 @app.route('/shop_women.html')
 def shop_women():
-    from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.route('/process_wear_type', methods=['POST'])
-def process_wear_type():
-    wear_type = request.form['wear_type']
-    # Redirect to the route that fetches data based on wear type
-    return redirect(url_for('fetch_data', wear_type=wear_type))
-
-@app.route('/fetch_data/<wear_type>', methods=['GET'])
-def fetch_data(wear_type):
+    
     combined_data_list = []
     
-    # Fetch data from MySQL based on wear type
+    # Fetch data from MySQL
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' AND sty.wearType = %s LIMIT 20;", (wear_type,))
+    cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' LIMIT 20;")
     
     for row in cursor.fetchall():
         combined_data_list.append(row)
     
     return render_template('shop_women.html', data=combined_data_list)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-    # combined_data_list = []
-    
-    # # Fetch data from MySQL
-    # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    # cursor.execute("SELECT sty.id, sty.subCategory, sty.productDisplayName, sty.price, images.link FROM sty INNER JOIN images ON sty.id = images.filename WHERE sty.gender = 'Women' LIMIT 20;")
-    
-    # for row in cursor.fetchall():
-    #     combined_data_list.append(row)
-    
-    # return render_template('shop_women.html', data=combined_data_list)
 
 
 
@@ -301,6 +282,7 @@ def shop_men():
     
     for row in cursor.fetchall():
         combined_data_list.append(row)
+    print(combined_data_list)
     
     return render_template('shop_men.html', data=combined_data_list)
     
