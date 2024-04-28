@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./"><img src="static\img\logo.png" alt=""></a>
+                        <a href="./"><img src="static\img\WhatsApp Image 2024-04-28 at 9.17.29 AM.jpeg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -196,7 +196,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>{{ product_info['product_display_name'] }}</h4>
+                            <h4><strong>{{ product_info['product_display_name'].title() }}</strong></h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -245,7 +245,7 @@
             </div>
             <div class="main_div" style="display: flex;">
                 {% for list in rec_prod_list %}
-                        <div class="product-card" style="display: flex; flex-direction: column; " >
+                        <div class="product-card" style="display: flex; flex-direction: column;width: height:1000px" >
                             <div class="product-image ">
                                 <img src="{{list['link'] }}" style="width: 250px; height: 210px;" alt="Product Image">
                     
@@ -260,14 +260,7 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
                                 </div>
-                                <span class="product-price"><div>{{list['price']}}</div></span>
-                                <div class="product-color-options">
-                                    <label for="color-option-1">
-                                        <input type="radio" id="color-option-1" name="color-option">
-                                        <span class="color-option"></span> <!-- Display color swatch -->
-                                    </label>
-                                    <!-- Add more color options as needed -->
-                                </div>
+                                <span class="product-price"><div>₹{{list['price']}}</div></span>
                                 <button class="add-to-cart-btn" style="width: 150px;height: 50px;">Add to Cart</button>
                             </div>
                         </div>

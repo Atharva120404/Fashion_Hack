@@ -283,7 +283,6 @@ def shop_men():
     for row in cursor.fetchall():
         combined_data_list.append(row)
     print(combined_data_list)
-    
     return render_template('shop_men.html', data=combined_data_list)
     
 # @app.route('/shop_women.html')

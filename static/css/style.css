@@ -54,6 +54,10 @@ h6 {
 	width: 250px;
 	height: 510px;
 }
+.team__item img{
+	height: 400px;
+
+}
 h1 {
 	font-size: 70px;
 }

@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./"><img src="C:\Users\Admin\Desktop\Hackathon\Fashion_Hack\static\img\logo.png" alt=""></a>
+                        <a href="./"><img src="static\img\WhatsApp Image 2024-04-28 at 9.17.29 AM.jpeg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -181,8 +181,8 @@
                     <span class="label">New</span> <!-- Optional label for new products -->
                     </div>
                     <div class="shop-details">
-                    <h3 class="product-title"><div>{{list['subCategory']}}</div></h3>
-                    <p class="product-description"><div class="product_text">{{list['productDisplayName']}}</div></p>
+                    <h3 class="product-title"><div><strong>{{list['subCategory'].title()}}</strong></div></h3>
+                    <p class="product-description"><div class="product_text">{{list['productDisplayName'].title()}}</div></p>
                     <div class="product-rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -190,7 +190,7 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i> <!-- Empty star for incomplete rating -->
                     </div>
-                    <span class="product-price"><div>{{list['price']}}</div></span>
+                    <span class="product-price"><div>₹{{list['price']}}</div></span>
                     <div class="product-color-options">
                         <label for="color-option-1">
                             <input type="radio" id="color-option-1" name="color-option">
