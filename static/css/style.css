@@ -100,9 +100,9 @@ textarea:focus {
 
 a:hover,
 a:focus {
-	text-decoration: none;
+	text-decoration: underline;
 	outline: none;
-	color: #ffffff;
+	color:black;
 }
 
 ul,
@@ -1211,7 +1211,7 @@ select, input[type="text"] {
 }
 
 .add-to-cart-btn:hover {
-    background-color: #cc0000; /* Darker shade on hover */
+    background-color: grey; /* Darker shade on hover */
 }
 
 .category {

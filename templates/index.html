@@ -78,30 +78,31 @@
                         <ul>
                             <li class="active"><a href="./">Home</a></li>
                             <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
+                            <li><a href="./about.html">About Us</a>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
+        
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
+                        <form action="/shop.html" method="POST"> <!-- Assuming '/shop.html' is the endpoint for processing the search -->
+                            <div class="search-container">
+                                <input type="text" placeholder="Search..." name="search_box" id="search_box">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
                         <div class="search-container">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
+                            <input type="text" placeholder="Search..." id="search_box">
+                            <button type="submit">submit</button>
+                        </div> -->
                         
-                        <a href="#"><img src="static\img\icon\heart.png" alt=""></a>
-                        <a href="#"><img src="static\img\icon\cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
                     </div>
                 </div>
             </div>
@@ -159,7 +160,9 @@
     </section> -->
     <div class="categories-container">
         <div class="category">
-            <button onmouseover="showDropdown('menDropdown')" onmouseleave="hideDropdown('menDropdown')">Men</button>
+            <a href="{{ url_for('shop_men') }}">
+                <button onmouseover="showDropdown('womenDropdown')" onmouseleave="hideDropdown('womenDropdown')">Men</button>
+            </a>
             <div id="menDropdown" class="dropdown-content">
                 <a href="#">Shirts</a>
                 <a href="#">Trousers</a>
@@ -183,17 +186,7 @@
                 <a href="#">Tops</a>
             </div>
         </div>
-        <div class="category">
-            <button onmouseover="showDropdown('babyDropdown')" onmouseleave="hideDropdown('babyDropdown')">Baby</button>
-            <div id="babyDropdown" class="dropdown-content">
-                <a href="#">Onesies</a>
-                <a href="#">Bibs</a>
-                <a href="#">Blankets</a>
-                <a href="#">Shoes</a>
-                <a href="#">Underwear</a>
-                <a href="#">Tops</a>
-            </div>
-        </div>
+        
     </div>
     
     
@@ -206,8 +199,7 @@
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                 <img src="static\img\hero\hero-1.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-                    <h2 class="data text-xl font-semibold">Title 1</h2>
-                    <p class="text-data text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    
                 </div>
             </div>
             <!-- Item 2 -->
